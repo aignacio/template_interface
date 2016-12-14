@@ -1,0 +1,13 @@
+#/bin/bash
+export APPLICATION="mocket"
+export MQTT_ADDR="127.0.0.1"
+export MQTT_PORT=1883
+export MONGODB_ADDR="127.0.0.1"
+export MONGODB_PORT=27017
+export MONGODB_DATABASE_NAME=$APPLICATION
+export MQTT_TIME_REQ='30000'
+export KING_UNIVERSE='AIGNACIO'
+printenv | grep --color "APPLICATION\|MQTT_ADDR\|MQTT_PORT\|MQTT_TIME_REQ\|MONGODB_ADDR\|MONGODB_PORT\|MONGODB_DATABASE_NAME\|KING_UNIVERSE"
+echo "[ENV] Variaveis de ambiente importadas! - Aplicação: $APPLICATION"
+exec $SHELL -i
+exit

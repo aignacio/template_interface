@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="superhero">
+<head>
+    <title>Login</title>
+    <link rel="icon" type="image/png" href="img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="lib/css/application.min.css">
+    <script type="text/javascript" src="lib/js/application.min.js"></script>
+    <script type="text/javascript" src="lib/js/package_angular.min.js"></script>
+</head>
+<body style="font-family: Montserrat;">
+  <div id="main" class="container">
+    <div class="col-sm-4 col-sm-offset-4" ng-controller="loginForm">
+        <div class="card card-container">
+          <div class="row" style="text-align:center;">
+          </div>
+          <div class="row" style="text-align:center;">
+            <h2>Application<font size="5">™</font></h2>
+            {{inform}}
+          </div>
+          <div class="row">
+            <form class="form-signin" action="/login" method="post">
+                <div class="form-group">
+                    <input type="text" placeholder="email ou username"  class="form-control" name="username">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="senha"  class="form-control" name="password">
+                </div>
+                <button type="submit" class="btn btn-default">Login</button>
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-danger"><%= message %></div>
+                <% } %>
+                <div class="row"></div>
+                <div class="row"></div>
+                <p>Sem cadastro? <a style="color:white;" href="/signup">Registre-se</a></p>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
