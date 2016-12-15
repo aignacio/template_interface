@@ -19,6 +19,8 @@ var db             = require('./config/db');
 var DEBUG_MONGO    = 0;
 var port           = process.env.PORT;
 var application    = process.env.APPLICATION;
+var Key            = require('./models/keyRegisterSchema');
+var md5            = require('md5');
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
@@ -42,6 +44,31 @@ db(DEBUG_MONGO);
 
 // routes ======================================================================
 require('./backend/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+
+// Generate key register =======================================================
+// for (var i = 0; i < 10; i++) {
+//   var key                   = new Key();
+//   var hash_value            = new Date();
+//
+//   hash_value                = hash_value+i*Math.random()+Math.random()*10;
+//   key.key_register          = md5(hash_value);
+//
+//   key.save(function(err) {
+//       if (err)
+//           throw err;
+//       // console.log('Chave de registro inserida:['+i+']['+key.key_register+']');
+//   });
+//   console.log('Chave ['+i+'] de acesso criada com sucesso!');
+// }
+
+Key.find({}, function(err, keys) {
+    if (err)
+        throw err;
+    for (var i = 0; i < keys.length; i++)
+      console.log('Chave=['+keys[i].key_register+']   Utilizada=['+keys[i].used+']');
+
+});
 
 // launch ======================================================================
 app.listen(port);

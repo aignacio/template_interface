@@ -30,6 +30,11 @@ var userSchema = new mongoose.Schema({
     ,hash_recover:{
       type: String
     }
+    ,hash_register:{
+      type: String
+      ,unique: true
+      ,required: true
+    }
     ,created: {
       type: Date
       ,default: Date.now

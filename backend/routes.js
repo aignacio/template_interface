@@ -54,6 +54,16 @@ module.exports = function(app, passport) {
   });
 
   // =====================================
+  // CHANGE PASS =========================
+  // =====================================
+  app.get('/pass_rec', function(req, res) {
+      // render the page and pass in any flash data if it exists
+      res.render('../dist/views/login/change_pass.ejs', {
+        // message: req.flash('signupMessage')
+      });
+  });
+
+  // =====================================
   // FAIL LOGIN ==========================
   // =====================================
   // show the signup form
@@ -99,9 +109,10 @@ module.exports = function(app, passport) {
   // Processa recover ====================
   // =====================================
   app.post('/recover',function(req,res){
-    var email = req.body.email;
+    var email = req.body.email,
+        hash_recover = md5(email+new Date());
     User.update({'profile.mail': email}, {
-        'profile.hash_recover': md5(email),
+        'profile.hash_recover': hash_recover,
         'profile.updated': new Date()
     },function (err, users) {
       if (err){
@@ -112,11 +123,39 @@ module.exports = function(app, passport) {
         if (users.nModified == '1') {
               console.log("E-mail de recuperação cadastrado!");
               res.send({'status':'success','info':'Verifique sua caixa de entrada'});
-              mail.mailSend(email);
+              mail.recoverMail(email, hash_recover);
         }
         else {
           console.log("E-mail de recuperação não cadastrado!");
           res.send({'status':'fail','info':'e-mail não cadastrado no sistema'});
+        }
+      }
+    });
+  });
+
+  // =====================================
+  // Processa change_pass (troca de senha)
+  // =====================================
+  app.post('/change_pass',function(req,res){
+    var hash_verf = req.body.hash_verf,
+        password = req.body.passwd;
+
+    User.update({'profile.hash_recover': hash_verf}, {
+        'profile.password': password,
+        'profile.updated': new Date()
+    },function (err, users) {
+      if (err){
+        console.log('Alteração de senha apresentou um problema!');
+        res.send({'status':'fail','info':'Geração de hash apresentou um problema!'});
+      }
+      else{
+        if (users.nModified == '1') {
+              console.log("Senha alterada com sucesso!");
+              res.send({'status':'success','info':'Senha alterada com sucesso'});
+        }
+        else {
+          console.log("Código hash informado: "+hash_verf+" não confere");
+          res.send({'status':'fail','info':'Código informado não existe'});
         }
       }
     });

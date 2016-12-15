@@ -82,6 +82,13 @@ gulp.task('watch', function() {
     gulp.watch([paths.scripts], ['lint','min_js']);
 });
 
+gulp.task('min_css', function () {
+    gulp.src(paths.styles)
+      .pipe(cssmin())
+      .pipe(rename({suffix: '.min'}))
+      .pipe(gulp.dest('dist/css'));
+});
+
 gulp.task('nodemon', function() {
     // gulp.task('default');
     nodemon({
