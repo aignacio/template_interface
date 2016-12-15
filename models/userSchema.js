@@ -11,11 +11,7 @@ var userSchema = new mongoose.Schema({
       ,lowercase: true
       ,unique: true
     }
-    ,firstname: {
-      type: String
-      ,required: true
-    }
-    ,lastname: {
+    ,name: {
       type: String
       ,required: true
     }
@@ -26,6 +22,13 @@ var userSchema = new mongoose.Schema({
     ,mail:{
       type: String
       ,required: true
+    }
+    ,phone:{
+      type: Number
+      ,required: true
+    }
+    ,hash_recover:{
+      type: String
     }
     ,created: {
       type: Date

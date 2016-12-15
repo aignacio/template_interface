@@ -17,7 +17,7 @@ var cookieParser   = require('cookie-parser');
 var session        = require('express-session');
 var db             = require('./config/db');
 var DEBUG_MONGO    = 0;
-var port           = process.env.PORT || 80;
+var port           = process.env.PORT;
 var application    = process.env.APPLICATION;
 
 app.use(bodyParser.json({limit: '50mb'}));

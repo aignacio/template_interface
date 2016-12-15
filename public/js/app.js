@@ -1,7 +1,9 @@
 var hero_aignacio = angular.module('superhero', ['ui.bootstrap',
                                                  'ngRoute',
                                                  'controller_index',
-                                                 'controller_login']);
+                                                 'controller_login',
+                                                 'directive_index',
+                                                 'ui.validate']);
 
 hero_aignacio.config(['$routeProvider', function($routeProvider) {
   $routeProvider.

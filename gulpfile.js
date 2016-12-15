@@ -76,8 +76,10 @@ gulp.task('build', ['copy-data','lint','min_js','usemin','min_html']);
 
 gulp.task('watch', function() {
     gulp.watch([paths.images], ['copy-images']);
+    gulp.watch([paths.styles], ['min_css']);
     gulp.watch([paths.index], ['usemin']);
     gulp.watch([paths.pages], ['min_html']);
+    gulp.watch([paths.scripts], ['lint','min_js']);
 });
 
 gulp.task('nodemon', function() {
