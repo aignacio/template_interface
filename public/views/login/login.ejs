@@ -37,8 +37,8 @@
                 <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Logar</button>
               </div>
               </br>
-              <p>Sem cadastro? <a href="/signup">Registre-se</a></p>
-              <p>Esqueceu a senha? <a href="/recover">Recuperar</a></p>
+              <p>Sem cadastro? <a href="/signup" ng-click="redirect('signup')">Registre-se</a></p>
+              <p>Esqueceu a senha? <a href="/recover" ng-click="redirect('recover')">Recuperar</a></p>
             </form>
           </div>
         </div>

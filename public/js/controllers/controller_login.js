@@ -11,6 +11,10 @@ controller_login.controller('loginForm',['$scope', 'md5', '$http', '$location', 
         console.log($scope.status);
     });
 
+    $scope.redirect = function(url){
+      $window.location.href = '/'+url;
+    };
+
     $scope.submitForm = function() {
 			if ($scope.userForm.$valid) {
 				// console.log('Enviando formulário para registro...');
