@@ -5,6 +5,7 @@ var md5           = require('md5');
 
 module.exports = function(app, passport) {
   // Rotas estáticas =====================
+
   // =====================================
   // HOME PAGE ===========================
   // =====================================
@@ -168,6 +169,17 @@ module.exports = function(app, passport) {
       res.render('../dist/index.ejs', {
           user : req.user // get the user out of session and pass to template
       });
+  });
+
+  // app.error(function(err, req, res, next){
+  //     if (err instanceof NotFound) {
+  //         res.render('../dist/views/login/not_found.ejs');
+  //     } else {
+  //         next(err);
+  //     }
+  // });
+  app.use(function(req, res, next) {
+    res.status(404).render('../dist/views/login/not_found.ejs');
   });
 };
 

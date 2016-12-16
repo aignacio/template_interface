@@ -4,14 +4,15 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <title>Sistema Mocket</title>
+      <title ng-controller="ctrlIndex">{{applicationName}} - Dashboard</title>
       <!-- STYLES -->
       <!-- build:css lib/css/application.min.css -->
       <link rel="stylesheet" type="text/css" href="public/css/application.css"/>
       <link rel="stylesheet" type="text/css" href="public/css/format_footer.css"/>
+      <link rel="stylesheet" type="text/css" href="public/css/sidebar.css"/>
       <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
       <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.min.css"/>
-      <link rel="icon"       type="image/png" href="public/img/favicon.ico"/>
+      <link rel="icon" type="image/png" href="public/img/favicon.ico">
       <!-- endbuild -->
 
       <!-- SCRIPTS -->
@@ -28,8 +29,51 @@
       <script type="text/javascript" src="lib/js/package_angular.min.js"></script>
   </head>
   <body style="font-family: Montserrat;">
-    <h1>Você está logado dentro do sistema!</h1>
-    <h2>Ânderson</h2>
-    <button type="submit" class="btn btn-default"><a href="/logout">SAIR DO SISTEMA</a></button>
+    <div id="wrapper" ng-class="class" ng-controller="ctrlIndex">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            <a ng-href="/" ng-click="toggleSideBar()"><span class="menu-icon"><img src="img/logos/awges_white_icon.png" alt="logo" class="icon"/></span>{{applicationName}}</a>
+          </li>
+          <li id="page_main" class="sidebar-list">
+            <a ng-href="dash"><span class="menu-icon fa fa-laptop"></span>Principal</a>
+          </li>
+          <li id="page_users" class="sidebar-list">
+            <a href="users"><span class="menu-icon fa fa-user"></span>Usuários</a>
+          </li>
+        </ul>
+        <!-- User Wrapper -->
+        <div id="user-wrapper ">
+            <h5 style="color:#848484; text-decoration:none;">
+              Bem vindo,
+            </h5>
+            <h4 style="color:#848484; text-decoration:none;">
+              <script> user="<%= user.profile.name %>";</script>
+              {{user}}
+            </h4>
+            <a href="#" ng-click="logout()" style="color: white; text-decoration:none;">
+              Sair
+            </a>
+            <br>
+            <!-- <a href="#/pass" id="8" onclick="pageInd(this.id)" style="color: white; text-decoration:none;">
+              Alterar a senha
+            </a> -->
+        </div>
+      </div>
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="col-lg-12">
+            <div class="row">
+              <div id="pageIndicator"></div>
+            </div>
+          </div>
+          <div id="mainWindow" class="row">
+            <div ng-view></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
