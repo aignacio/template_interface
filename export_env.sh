@@ -1,5 +1,5 @@
 #/bin/bash
-export APPLICATION="Avathi"
+export APPLICATION="aignacio"
 export PORT=80
 export MQTT_ADDR="127.0.0.1"
 export MQTT_PORT=1883
